@@ -396,7 +396,7 @@ export default class ImageViewer{
         const touchAndImages = this.view.querySelectorAll('.touchSurface, .image');
         touchAndImages.forEach(element => {
             element.addEventListener('click', e => {
-                e.stopPropagation();
+//                 e.stopPropagation();
                 if(!this.dbcWaiting){
                     this.dbcWaiting = true;
                     this.dbcTimer = setTimeout(() => {
