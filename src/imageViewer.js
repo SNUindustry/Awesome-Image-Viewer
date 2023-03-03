@@ -278,7 +278,7 @@ class ImageViewer {
         touchSurface.addEventListener('touchstart', e => {
             if (this.isInZoom)
                 return;
-            if(e.touches.length>1) {console.log("두개개ㅐ개 start ");  return;}
+            if(e.touches.length>1) {  return;}
             let touch = e.touches[0];
             swipeDetection.startX = touch.screenX;
             swipeDetection.startY = touch.screenY;
@@ -291,10 +291,7 @@ class ImageViewer {
             if (this.isInZoom)
                 return;
 //             e.preventDefault();
-            console.log("touch count");
-                        console.log(e.touches.length);
-            if(e.touches.length>1) {console.log("두개개ㅐ개 moving");  return;}
-            console.log("touch movee222");
+            if(e.touches.length>1) {return;}
             let touch = e.touches[0];
             swipeDetection.endX = touch.screenX;
             swipeDetection.endY = touch.screenY;
@@ -305,7 +302,7 @@ class ImageViewer {
         touchSurface.addEventListener('touchend', e => {
             if (this.isInZoom)
                 return;
-            if(e.touches.length>1) {console.log("두개개ㅐ end");  return;}
+            if(e.touches.length>1) { return;}
             //horizontal detection:
             if ((((swipeDetection.endX - minX > swipeDetection.startX) || (swipeDetection.endX + minX < swipeDetection.startX)) &&
                 ((swipeDetection.endY < swipeDetection.startY + maxY) && (swipeDetection.startY > swipeDetection.endY - maxY) &&
