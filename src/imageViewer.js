@@ -291,8 +291,10 @@ class ImageViewer {
             if (this.isInZoom)
                 return;
 //             e.preventDefault();
+            console.log("touch count");
+                        console.log(e.touches.length);
             if(e.touches.length>1) {console.log("두개개ㅐ개 moving"); e.preventDefault(); return;}
-            console.log("touch movee");
+            console.log("touch movee111");
             let touch = e.touches[0];
             swipeDetection.endX = touch.screenX;
             swipeDetection.endY = touch.screenY;
