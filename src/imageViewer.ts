@@ -354,7 +354,8 @@ export default class ImageViewer{
         });
         touchSurface.addEventListener('touchmove', e => {
             if(this.isInZoom) return;
-            e.preventDefault();
+//             e.preventDefault();
+		console.log("touch movee tsts");
             let touch = e.touches[0];
             swipeDetection.endX = touch.screenX;
             swipeDetection.endY = touch.screenY;
