@@ -135,11 +135,14 @@ class ImageViewer {
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
         this.images.forEach((image) => {
             const imageHtml = ImageViewer.getImageHtml(image.mainUrl, this.stretchImages);
-            console.log(imageHtml.toString());
+            console.log('imageHtml');
+            console.log(imageHtml);
             
             const imageElement = imageHtml.getElementsByClassName('image')[0];
+            console.log('imageHtml');
+            console.log(imageElement);
             imageElement.addEventListener('click', e => {
-              console.log("image!!!!")
+              console.log("image!!!!");
               e.stopPropagation();
             });
             imagesWrapper.appendChild(imageHtml);
