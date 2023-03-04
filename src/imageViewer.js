@@ -135,15 +135,13 @@ class ImageViewer {
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
         this.images.forEach((image) => {
             const imageHtml = ImageViewer.getImageHtml(image.mainUrl, this.stretchImages);
+            imageHtml.addEventListener('click', e => {
+              console.log("image!!!!")
+              e.stopPropagation();
+            });
             imagesWrapper.appendChild(imageHtml);
         });
-        const imageElements =  imagesWrapper.getElementsByClassName('image');
-        imageElements.forEach((element) => {
-          element.addEventListener('click', e => {
-            console.log("image!!!!")
-            e.stopPropagation();
-          });
-      });
+         
     }
     //showToolbar:
     showToolbar() {
