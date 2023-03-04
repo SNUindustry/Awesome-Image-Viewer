@@ -700,15 +700,15 @@ const Style = `
     cursor: default;
   }
   .imageViewer > .container > .imagesWrapper > .imageContainer > .image {
-    width: fit-content;
+    width: auto;
     max-width: 100%;
-    height: fit-content;
+    height: auto;
     max-height: 100%;
     cursor: pointer;
   }
   .imageViewer > .container > .imagesWrapper .stretch > .image {
     width: 100%;
-    height: 100%;
+    height: auto;
     -o-object-fit: contain;
        object-fit: contain;
   }
