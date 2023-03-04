@@ -145,6 +145,7 @@ class ImageViewer {
               console.log('image loaded');
               console.log('image loaded '+imageElement.width);
               console.log('image loaded '+imageElement.height);
+              imageElement.appendChild(<div>aaaaaaa</div>);
               imageElement.addEventListener('click', e => {
                 console.log("image!!!!2323");
                 e.stopPropagation();
