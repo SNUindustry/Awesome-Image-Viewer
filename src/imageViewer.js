@@ -229,6 +229,12 @@ class ImageViewer {
         const imageContainer = imageContainers.item(index);
         const url = imageContainer.dataset.url;
         const image = imageContainer.getElementsByClassName('image')[0];
+        image.addEventListener('click', e => {
+          //이거 되나?  
+          console.log('image clicked')
+          e.stopPropagation();
+           
+        });
         image.src = url;
     }
     //scrollToImage:
@@ -363,26 +369,7 @@ class ImageViewer {
                     this.flipZoom(e.clientX, e.clientY);
                 }
             });
-        image.addEventListener('click', e => {
-              //이거 되나?  
-              console.log('image clicked')
-              // e.stopPropagation();
-                if (!this.dbcWaiting) {
-                    this.dbcWaiting = true;
-                    this.dbcTimer = setTimeout(() => {
-                        //single click:
-                        if (this.dbcWaiting)
-                            this.flipHud(!this.isHudShow);
-                        this.dbcWaiting = false;
-                    }, 200);
-                }
-                else {
-                    //double click:
-                    clearTimeout(this.dbcTimer);
-                    this.dbcWaiting = false;
-                    this.flipZoom(e.clientX, e.clientY);
-                }
-            });
+      
         //zoom button:
         const zoomButtons = this.view.querySelectorAll('.zoomInButton, .zoomOutButton');
         zoomButtons.forEach(button => {
@@ -421,11 +408,7 @@ class ImageViewer {
       imagesWrapper.addEventListener('click', e => {
         console.log("shadow")
         this.hide();
-      });
-      const imagesWrapper = this.view.getElementsByClassName('imageContainer')[0];
-      imagesWrapper.addEventListener('click', e => {
-        this.hide();
-      });
+      }); 
 
   }
     //flipZoom:
