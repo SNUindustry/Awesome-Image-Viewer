@@ -143,6 +143,8 @@ class ImageViewer {
             console.log(imageElement);
             imageElement.onload = function() { 
               console.log('image loaded');
+              console.log('image loaded '+imageElement.width);
+              console.log('image loaded '+imageElement.height);
               imageElement.addEventListener('click', e => {
                 console.log("image!!!!2323");
                 e.stopPropagation();
@@ -407,11 +409,11 @@ class ImageViewer {
     addEventToCloseWhenTouchedBackground() {
       //prevent scroll on zoom:
       
-      const container = this.view.getElementsByClassName('container')[0];
-      container.addEventListener('click', e => {
-        console.log("conatiner")
-        this.hide();
-      });
+      // const container = this.view.getElementsByClassName('container')[0];
+      // container.addEventListener('click', e => {
+      //   console.log("conatiner")
+      //   this.hide();
+      // });
       
 
   }
