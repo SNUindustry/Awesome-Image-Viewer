@@ -135,7 +135,10 @@ class ImageViewer {
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
         this.images.forEach((image) => {
             const imageHtml = ImageViewer.getImageHtml(image.mainUrl, this.stretchImages);
-            imageHtml.addEventListener('click', e => {
+            console.log(imageHtml.toString());
+            
+            const imageElement = imageHtml.getElementsByClassName('image')[0];
+            imageElement.addEventListener('click', e => {
               console.log("image!!!!")
               e.stopPropagation();
             });
