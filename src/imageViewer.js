@@ -145,9 +145,7 @@ class ImageViewer {
               console.log('image loaded');
               console.log('image loaded '+imageElement.width);
               console.log('image loaded '+imageElement.height);
-              imageElement.appendChild(ImageViewer.getChildNode("<div>aaaaaaa</div>"));
               imageElement.addEventListener('click', e => {
-                console.log("image!!!!2323");
                 e.stopPropagation();
               });
           };
@@ -249,10 +247,6 @@ class ImageViewer {
         const url = imageContainer.dataset.url;
         const image = imageContainer.getElementsByClassName('image')[0];
         image.src = url;
-        image.addEventListener('click', e => {
-          console.log("image!!!! hhh");
-          e.stopPropagation();
-        });
     }
     //scrollToImage:
     scrollToImage(index) {
@@ -367,8 +361,6 @@ class ImageViewer {
         touchSurface.addEventListener('click', e => {
               //이거 되나?  
               console.log('touch clicked')
-              
-              // e.stopPropagation();
                 if (!this.dbcWaiting) {
                     this.dbcWaiting = true;
                     this.dbcTimer = setTimeout(() => {
@@ -736,6 +728,7 @@ const Style = `
     position: absolute;
     top: 0;
     left: 0;
+    pointer-events: none;
   }
   .imageViewer > .container > .toolbar {
     width: 55px;
