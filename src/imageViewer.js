@@ -149,8 +149,6 @@ class ImageViewer {
                 e.stopPropagation();
               });
           };
-          
-            
             imagesWrapper.appendChild(imageHtml);
         });
          
@@ -360,7 +358,7 @@ class ImageViewer {
 
         touchSurface.addEventListener('click', e => {
               //이거 되나?  
-              console.log('touch clicked')
+              console.log('touch clicked');
                 if (!this.dbcWaiting) {
                     this.dbcWaiting = true;
                     this.dbcTimer = setTimeout(() => {
@@ -401,13 +399,13 @@ class ImageViewer {
     //close when touched background:
     addEventToCloseWhenTouchedBackground() {
       //prevent scroll on zoom:
-      
-      // const container = this.view.getElementsByClassName('container')[0];
-      // container.addEventListener('click', e => {
-      //   console.log("conatiner")
-      //   this.hide();
-      // });
-      
+      const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
+      imagesWrapper.addEventListener('click', e => {
+        console.log("image wraperer");
+        this.hide();
+    });
+
+
 
   }
     //flipZoom:
