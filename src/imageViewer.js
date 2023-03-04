@@ -142,7 +142,7 @@ class ImageViewer {
             console.log('Element');
             console.log(imageElement);
             imageElement.onload = function() { 
-              console.log('image loaded 111');
+              console.log('image loaded 222');
               console.log('image loaded '+imageElement.width);
               console.log('image loaded '+imageElement.height);
               imageElement.addEventListener('click', e => {
