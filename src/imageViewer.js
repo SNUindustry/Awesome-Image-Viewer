@@ -137,6 +137,13 @@ class ImageViewer {
             const imageHtml = ImageViewer.getImageHtml(image.mainUrl, this.stretchImages);
             imagesWrapper.appendChild(imageHtml);
         });
+        const imageElements =  imagesWrapper.getElementsByClassName('image');
+        imageElements.forEach((element) => {
+          element.addEventListener('click', e => {
+            console.log("image!!!!")
+            e.stopPropagation();
+          });
+      });
     }
     //showToolbar:
     showToolbar() {
@@ -229,12 +236,7 @@ class ImageViewer {
         const imageContainer = imageContainers.item(index);
         const url = imageContainer.dataset.url;
         const image = imageContainer.getElementsByClassName('image')[0];
-        image.addEventListener('click', e => {
-          //이거 되나?  
-          console.log('image clicked')
-          e.stopPropagation();
-           
-        });
+        
         image.src = url;
     }
     //scrollToImage:
@@ -346,7 +348,6 @@ class ImageViewer {
     addEventToHudAndZoom() {
         // const touchAndImages = this.view.querySelectorAll('.touchSurface, .image');
         const touchSurface = this.view.getElementsByClassName('touchSurface')[0];
-        const image = this.view.getElementsByClassName('image')[0];
 
         touchSurface.addEventListener('click', e => {
               //이거 되나?  
@@ -393,22 +394,13 @@ class ImageViewer {
     //close when touched background:
     addEventToCloseWhenTouchedBackground() {
       //prevent scroll on zoom:
-      console.log('imagesWrapper clicked')
-      const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
-      imagesWrapper.addEventListener('click', e => {
-        console.log("wratper")
-        this.hide();
-      });
+      
       const container = this.view.getElementsByClassName('container')[0];
       container.addEventListener('click', e => {
         console.log("conatiner")
         this.hide();
       });
-      const shadow = this.view.getElementsByClassName('shadow')[0];
-      imagesWrapper.addEventListener('click', e => {
-        console.log("shadow")
-        this.hide();
-      }); 
+      
 
   }
     //flipZoom:
