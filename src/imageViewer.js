@@ -309,7 +309,7 @@ class ImageViewer {
                 return;
 //             e.preventDefault();
             console.log("touch count");
-                        console.log(e.touches.length);
+             console.log(e.touches.length);
             if(e.touches.length>1) { return;}
             console.log("touch movee222");
             let touch = e.touches[0];
@@ -700,9 +700,9 @@ const Style = `
     cursor: default;
   }
   .imageViewer > .container > .imagesWrapper > .imageContainer > .image {
-    width: auto;
+    width: fit-content;
     max-width: 100%;
-    height: auto;
+    height: fit-content;
     max-height: 100%;
     cursor: pointer;
   }
@@ -727,6 +727,7 @@ const Style = `
     top: 0;
     left: 0;
     pointer-events: none;
+    display: block;
   }
   .imageViewer > .container > .toolbar {
     width: 55px;
