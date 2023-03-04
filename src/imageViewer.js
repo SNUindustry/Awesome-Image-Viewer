@@ -345,6 +345,7 @@ class ImageViewer {
         touchSurface.addEventListener('click', e => {
               //이거 되나?  
               console.log('touch clicked')
+              
               // e.stopPropagation();
                 if (!this.dbcWaiting) {
                     this.dbcWaiting = true;
@@ -362,10 +363,10 @@ class ImageViewer {
                     this.flipZoom(e.clientX, e.clientY);
                 }
             });
-            image.addEventListener('click', e => {
+        image.addEventListener('click', e => {
               //이거 되나?  
               console.log('image clicked')
-              e.stopPropagation();
+              // e.stopPropagation();
                 if (!this.dbcWaiting) {
                     this.dbcWaiting = true;
                     this.dbcTimer = setTimeout(() => {
@@ -407,6 +408,21 @@ class ImageViewer {
       //prevent scroll on zoom:
       console.log('imagesWrapper clicked')
       const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
+      imagesWrapper.addEventListener('click', e => {
+        console.log("wratper")
+        this.hide();
+      });
+      const container = this.view.getElementsByClassName('container')[0];
+      container.addEventListener('click', e => {
+        console.log("conatiner")
+        this.hide();
+      });
+      const shadow = this.view.getElementsByClassName('shadow')[0];
+      imagesWrapper.addEventListener('click', e => {
+        console.log("shadow")
+        this.hide();
+      });
+      const imagesWrapper = this.view.getElementsByClassName('imageContainer')[0];
       imagesWrapper.addEventListener('click', e => {
         this.hide();
       });
@@ -890,8 +906,8 @@ const Style = `
     .imageViewer > .container > .toolbar {
       width: 100%;
       height: 50px;
-      flex-direction: row-reverse;
-      background-color : #00000050;
+      flex-direction: row;
+      background-color : #000000bb;
     }
     .imageViewer > .container > .toolbar > .defaultButton,
   .imageViewer > .container > .toolbar > .customButton {
@@ -909,7 +925,7 @@ const Style = `
     .imageViewer > .container > .toolbar {
       width: auto;
       height: 50px;
-      flex-direction: row-reverse;
+      flex-direction: row;
     }
     .imageViewer > .container > .toolbar > .defaultButton,
   .imageViewer > .container > .toolbar > .customButton {
