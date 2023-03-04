@@ -135,16 +135,21 @@ class ImageViewer {
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
         this.images.forEach((image) => {
             const imageHtml = ImageViewer.getImageHtml(image.mainUrl, this.stretchImages);
-            console.log('imageHtml');
+            console.log('Html');
             console.log(imageHtml);
             
             const imageElement = imageHtml.getElementsByClassName('image')[0];
-            console.log('imageHtml');
+            console.log('Element');
             console.log(imageElement);
-            imageElement.addEventListener('click', e => {
-              console.log("image!!!!");
-              e.stopPropagation();
-            });
+            imageElement.onload = function() { 
+              console.log('image loaded');
+              imageElement.addEventListener('click', e => {
+                console.log("image!!!!2323");
+                e.stopPropagation();
+              });
+          };
+          
+            
             imagesWrapper.appendChild(imageHtml);
         });
          
@@ -240,8 +245,11 @@ class ImageViewer {
         const imageContainer = imageContainers.item(index);
         const url = imageContainer.dataset.url;
         const image = imageContainer.getElementsByClassName('image')[0];
-        
         image.src = url;
+        image.addEventListener('click', e => {
+          console.log("image!!!! hhh");
+          e.stopPropagation();
+        });
     }
     //scrollToImage:
     scrollToImage(index) {
