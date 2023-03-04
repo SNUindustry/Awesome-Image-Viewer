@@ -338,11 +338,33 @@ class ImageViewer {
     }
     //addEventToHudAndZoom:
     addEventToHudAndZoom() {
-        const touchAndImages = this.view.querySelectorAll('.touchSurface, .image');
-        touchAndImages.forEach(element => {
-            element.addEventListener('click', e => {
+        // const touchAndImages = this.view.querySelectorAll('.touchSurface, .image');
+        const touchSurface = this.view.getElementsByClassName('touchSurface')[0];
+        const image = this.view.getElementsByClassName('image')[0];
+
+        touchSurface.addEventListener('click', e => {
               //이거 되나?  
-              console.log('touch or image clicked')
+              console.log('touch clicked')
+              // e.stopPropagation();
+                if (!this.dbcWaiting) {
+                    this.dbcWaiting = true;
+                    this.dbcTimer = setTimeout(() => {
+                        //single click:
+                        if (this.dbcWaiting)
+                            this.flipHud(!this.isHudShow);
+                        this.dbcWaiting = false;
+                    }, 200);
+                }
+                else {
+                    //double click:
+                    clearTimeout(this.dbcTimer);
+                    this.dbcWaiting = false;
+                    this.flipZoom(e.clientX, e.clientY);
+                }
+            });
+            image.addEventListener('click', e => {
+              //이거 되나?  
+              console.log('image clicked')
               e.stopPropagation();
                 if (!this.dbcWaiting) {
                     this.dbcWaiting = true;
@@ -360,7 +382,6 @@ class ImageViewer {
                     this.flipZoom(e.clientX, e.clientY);
                 }
             });
-        });
         //zoom button:
         const zoomButtons = this.view.querySelectorAll('.zoomInButton, .zoomOutButton');
         zoomButtons.forEach(button => {
@@ -867,9 +888,10 @@ const Style = `
   
   @media (max-width: 450px) {
     .imageViewer > .container > .toolbar {
-      width: auto;
+      width: 100%;
       height: 50px;
       flex-direction: row-reverse;
+      background-color : #00000050;
     }
     .imageViewer > .container > .toolbar > .defaultButton,
   .imageViewer > .container > .toolbar > .customButton {
