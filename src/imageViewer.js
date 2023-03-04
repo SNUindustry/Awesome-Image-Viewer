@@ -726,8 +726,7 @@ const Style = `
     position: absolute;
     top: 0;
     left: 0;
-    pointer-events: none;
-    display: block;
+   
   }
   .imageViewer > .container > .toolbar {
     width: 55px;
