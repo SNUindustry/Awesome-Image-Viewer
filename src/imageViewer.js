@@ -40,6 +40,8 @@ class ImageViewer {
         }, () => this.selectImage(this.currentSelected));
         //hud and zoom events:
         this.addEventToHudAndZoom();
+
+        this.addEventToCloseWhenTouchedBackground();
         //addEventToWindowResize:
         this.addEventToWindowResize();
         //set style:
@@ -278,7 +280,7 @@ class ImageViewer {
         touchSurface.addEventListener('touchstart', e => {
             if (this.isInZoom)
                 return;
-            if(e.touches.length>1) {  return;}
+            if(e.touches.length>1) { return;}
             let touch = e.touches[0];
             swipeDetection.startX = touch.screenX;
             swipeDetection.startY = touch.screenY;
@@ -291,7 +293,10 @@ class ImageViewer {
             if (this.isInZoom)
                 return;
 //             e.preventDefault();
-            if(e.touches.length>1) {return;}
+            console.log("touch count");
+                        console.log(e.touches.length);
+            if(e.touches.length>1) { return;}
+            console.log("touch movee222");
             let touch = e.touches[0];
             swipeDetection.endX = touch.screenX;
             swipeDetection.endY = touch.screenY;
@@ -336,7 +341,9 @@ class ImageViewer {
         const touchAndImages = this.view.querySelectorAll('.touchSurface, .image');
         touchAndImages.forEach(element => {
             element.addEventListener('click', e => {
-//                 e.stopPropagation();
+              //이거 되나?  
+              console.log('touch or image clicked')
+              e.stopPropagation();
                 if (!this.dbcWaiting) {
                     this.dbcWaiting = true;
                     this.dbcTimer = setTimeout(() => {
@@ -374,6 +381,16 @@ class ImageViewer {
                 imagesWrapper.style.overflow = 'scroll';
         });
     }
+    //close when touched background:
+    addEventToCloseWhenTouchedBackground() {
+      //prevent scroll on zoom:
+      console.log('imagesWrapper clicked')
+      const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
+      imagesWrapper.addEventListener('click', e => {
+        this.hide();
+      });
+
+  }
     //flipZoom:
     flipZoom(clickX, clickY) {
         if (!this.isZoomable)
