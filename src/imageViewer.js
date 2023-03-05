@@ -130,6 +130,35 @@ class ImageViewer {
         div.innerHTML = html.trim();
         return div.firstChild || div;
     }
+
+    function touchSurfaceClickEvent(e) {
+      e => {
+        //이거 되나?
+        
+          if (!this.dbcWaiting) {
+              this.dbcWaiting = true;
+              this.dbcTimer = setTimeout(() => {
+                  //single click:
+                  if (this.dbcWaiting)
+                      this.flipHud(!this.isHudShow);
+                  this.dbcWaiting = false;
+              }, 200);
+          }
+          else {
+              //double click:
+              clearTimeout(this.dbcTimer);
+              this.dbcWaiting = false;
+              this.flipZoom(e.clientX, e.clientY);
+          }
+
+        const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
+        const imageElements = imagesWrapper.getElementsByClassName('image');
+        imageElements.forEach((image) => {
+          image.dispatchEvent(e);
+        })
+          
+      }
+    }
     //showImages:
     showImages() {
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
@@ -141,18 +170,30 @@ class ImageViewer {
             const imageElement = imageHtml.getElementsByClassName('image')[0];
             console.log('Element');
             console.log(imageElement);
-            imageElement.onload = function() { 
-              console.log('image loaded 222');
+            
+            imageElement.onload = function() {
+              console.log('image loaded 333');
               console.log('image loaded '+imageElement.width);
               console.log('image loaded '+imageElement.height);
+              
               imageElement.addEventListener('click', e => {
                 e.stopPropagation();
-              });
+              }, { once : true });
           };
             imagesWrapper.appendChild(imageHtml);
         });
          
+        
+        // 기존 touchsurface의 이벤트 리스너는 함수 형태로 밖으로 빼서 그걸로 remove event litsernr해서 제거하고
+        // 새로 설정
+        // 여기에서 각 이미지 엘리먼트 들을 긁어온다음에 element.dispatchevent로 이벤트 전달.
+        const touchSurface = this.view.getElementsByClassName('touchSurface')[0];
+        touchSurface.removeEventListener(touchSurfaceClickEvent);
+        touchSurface.addEventListener('click', touchSurfaceClickEvent);
+
     }
+
+    
     //showToolbar:
     showToolbar() {
         var _a;
@@ -354,27 +395,7 @@ class ImageViewer {
     //addEventToHudAndZoom:
     addEventToHudAndZoom() {
         // const touchAndImages = this.view.querySelectorAll('.touchSurface, .image');
-        const touchSurface = this.view.getElementsByClassName('touchSurface')[0];
-
-        touchSurface.addEventListener('click', e => {
-              //이거 되나?  
-              console.log('touch clicked');
-                if (!this.dbcWaiting) {
-                    this.dbcWaiting = true;
-                    this.dbcTimer = setTimeout(() => {
-                        //single click:
-                        if (this.dbcWaiting)
-                            this.flipHud(!this.isHudShow);
-                        this.dbcWaiting = false;
-                    }, 200);
-                }
-                else {
-                    //double click:
-                    clearTimeout(this.dbcTimer);
-                    this.dbcWaiting = false;
-                    this.flipZoom(e.clientX, e.clientY);
-                }
-            });
+        
       
         //zoom button:
         const zoomButtons = this.view.querySelectorAll('.zoomInButton, .zoomOutButton');
