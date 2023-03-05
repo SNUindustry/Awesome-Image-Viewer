@@ -130,7 +130,7 @@ class ImageViewer {
         div.innerHTML = html.trim();
         return div.firstChild || div;
     }
-
+    
     static touchSurfaceClickEvent(e) {
       e => {
         //이거 되나?
@@ -153,7 +153,9 @@ class ImageViewer {
 
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
         const imageElements = imagesWrapper.getElementsByClassName('image');
+        
         imageElements.forEach((image) => {
+          console.log('dispatching~~');
           image.dispatchEvent(e);
         })
           
@@ -177,6 +179,7 @@ class ImageViewer {
               console.log('image loaded '+imageElement.height);
               
               imageElement.addEventListener('click', e => {
+                console.log('image clicked 333');
                 e.stopPropagation();
               }, { once : true });
           };
@@ -190,7 +193,7 @@ class ImageViewer {
         const touchSurface = this.view.getElementsByClassName('touchSurface')[0];
         touchSurface.removeEventListener('click', this.touchSurfaceClickEvent);
         touchSurface.addEventListener('click', this.touchSurfaceClickEvent);
-
+        
     }
 
     
