@@ -40,6 +40,8 @@ class ImageViewer {
         }, () => this.selectImage(this.currentSelected));
         //hud and zoom events:
         this.addEventToHudAndZoom();
+
+        
         //addEventToWindowResize:
         this.addEventToWindowResize();
         //set style:
@@ -128,6 +130,7 @@ class ImageViewer {
         div.innerHTML = html.trim();
         return div.firstChild || div;
     }
+   
     //showImages:
     showImages() {
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
@@ -136,6 +139,8 @@ class ImageViewer {
             imagesWrapper.appendChild(imageHtml);
         });
     }
+
+    
     //showToolbar:
     showToolbar() {
         var _a;
@@ -278,6 +283,7 @@ class ImageViewer {
         touchSurface.addEventListener('touchstart', e => {
             if (this.isInZoom)
                 return;
+            if(e.touches.length>1) { return;}
             let touch = e.touches[0];
             swipeDetection.startX = touch.screenX;
             swipeDetection.startY = touch.screenY;
@@ -289,7 +295,10 @@ class ImageViewer {
         touchSurface.addEventListener('touchmove', e => {
             if (this.isInZoom)
                 return;
-            e.preventDefault();
+//             e.preventDefault();
+
+            if(e.touches.length>1) { return;}
+
             let touch = e.touches[0];
             swipeDetection.endX = touch.screenX;
             swipeDetection.endY = touch.screenY;
@@ -300,6 +309,7 @@ class ImageViewer {
         touchSurface.addEventListener('touchend', e => {
             if (this.isInZoom)
                 return;
+            if(e.touches.length>1) { return;}
             //horizontal detection:
             if ((((swipeDetection.endX - minX > swipeDetection.startX) || (swipeDetection.endX + minX < swipeDetection.startX)) &&
                 ((swipeDetection.endY < swipeDetection.startY + maxY) && (swipeDetection.startY > swipeDetection.endY - maxY) &&
@@ -330,10 +340,12 @@ class ImageViewer {
     }
     //addEventToHudAndZoom:
     addEventToHudAndZoom() {
+        // const touchAndImages = this.view.querySelectorAll('.touchSurface, .image');
+        
         const touchAndImages = this.view.querySelectorAll('.touchSurface, .image');
         touchAndImages.forEach(element => {
             element.addEventListener('click', e => {
-                e.stopPropagation();
+                // e.stopPropagation();
                 if (!this.dbcWaiting) {
                     this.dbcWaiting = true;
                     this.dbcTimer = setTimeout(() => {
@@ -371,6 +383,7 @@ class ImageViewer {
                 imagesWrapper.style.overflow = 'scroll';
         });
     }
+ 
     //flipZoom:
     flipZoom(clickX, clickY) {
         if (!this.isZoomable)
@@ -630,7 +643,7 @@ const Style = `
   .imageViewer > .shadow {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 1);
     opacity: 0;
     transition: opacity 160ms ease-in-out;
   }
@@ -671,7 +684,7 @@ const Style = `
   }
   .imageViewer > .container > .imagesWrapper .stretch > .image {
     width: 100%;
-    height: 100%;
+    height: auto;
     -o-object-fit: contain;
        object-fit: contain;
   }
@@ -689,6 +702,7 @@ const Style = `
     position: absolute;
     top: 0;
     left: 0;
+   
   }
   .imageViewer > .container > .toolbar {
     width: 55px;
@@ -847,9 +861,10 @@ const Style = `
   
   @media (max-width: 450px) {
     .imageViewer > .container > .toolbar {
-      width: auto;
+      width: 100%;
       height: 50px;
-      flex-direction: row-reverse;
+      flex-direction: row;
+      background-color : #000000bb;
     }
     .imageViewer > .container > .toolbar > .defaultButton,
   .imageViewer > .container > .toolbar > .customButton {
@@ -867,7 +882,7 @@ const Style = `
     .imageViewer > .container > .toolbar {
       width: auto;
       height: 50px;
-      flex-direction: row-reverse;
+      flex-direction: row;
     }
     .imageViewer > .container > .toolbar > .defaultButton,
   .imageViewer > .container > .toolbar > .customButton {
