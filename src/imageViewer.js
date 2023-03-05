@@ -131,7 +131,7 @@ class ImageViewer {
         return div.firstChild || div;
     }
 
-    function touchSurfaceClickEvent(e) {
+    static touchSurfaceClickEvent(e) {
       e => {
         //이거 되나?
         
