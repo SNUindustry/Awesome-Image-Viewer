@@ -193,7 +193,7 @@ class ImageViewer {
         console.log('touch surface 333');
         const touchSurface = this.view.getElementsByClassName('touchSurface')[0];
         console.log('touch surface 444');
-        touchSurface.addEventListener('click', this.touchSurfaceClickEvent);
+        touchSurface.addEventListener('click', ImageViewer.touchSurfaceClickEvent);
         console.log('touch surface 555');
         
     }
