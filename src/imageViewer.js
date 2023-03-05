@@ -134,7 +134,7 @@ class ImageViewer {
     static touchSurfaceClickEvent(e) {
       e => {
         //이거 되나?
-        
+        console.log('dispatching~~');
           if (!this.dbcWaiting) {
               this.dbcWaiting = true;
               this.dbcTimer = setTimeout(() => {
@@ -157,7 +157,7 @@ class ImageViewer {
         imageElements.forEach((image) => {
           console.log('dispatching~~');
           image.dispatchEvent(e);
-        })
+        });
           
       }
     }
@@ -193,7 +193,32 @@ class ImageViewer {
         console.log('touch surface 333');
         const touchSurface = this.view.getElementsByClassName('touchSurface')[0];
         console.log('touch surface 444');
-        touchSurface.addEventListener('click', ImageViewer.touchSurfaceClickEvent);
+        touchSurface.addEventListener('click', e => {
+          console.log('surface clicked~~');
+          if (!this.dbcWaiting) {
+              this.dbcWaiting = true;
+              this.dbcTimer = setTimeout(() => {
+                  //single click:
+                  if (this.dbcWaiting)
+                      this.flipHud(!this.isHudShow);
+                  this.dbcWaiting = false;
+              }, 200);
+          }
+          else {
+              //double click:
+              clearTimeout(this.dbcTimer);
+              this.dbcWaiting = false;
+              this.flipZoom(e.clientX, e.clientY);
+          }
+
+        const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
+        const imageElements = imagesWrapper.getElementsByClassName('image');
+        
+        imageElements.forEach((image) => {
+          console.log('dispatching~~');
+          image.dispatchEvent(e);
+        });
+        });
         console.log('touch surface 555');
         
     }
