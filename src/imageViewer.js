@@ -166,8 +166,7 @@ class ImageViewer {
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
         this.images.forEach((image) => {
             const imageHtml = ImageViewer.getImageHtml(image.mainUrl, this.stretchImages);
-            console.log('Html');
-            console.log(imageHtml);
+            
             
             const imageElement = imageHtml.getElementsByClassName('image')[0];
             console.log('Element');
@@ -213,6 +212,15 @@ class ImageViewer {
 
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
         const imageElements = imagesWrapper.getElementsByClassName('image');
+        const testss = this.view.getElementsByClassName('image')
+
+        
+        console.log('imageElements.length');
+        
+        console.log(testss);
+        console.log(imagesWrapper);
+        console.log(imageElements);
+        console.log(imageElements.length);
         
         imageElements.forEach((image) => {
           console.log('dispatching~~');
@@ -379,10 +387,9 @@ class ImageViewer {
             if (this.isInZoom)
                 return;
 //             e.preventDefault();
-            console.log("touch count");
-             console.log(e.touches.length);
+
             if(e.touches.length>1) { return;}
-            console.log("touch movee222");
+
             let touch = e.touches[0];
             swipeDetection.endX = touch.screenX;
             swipeDetection.endY = touch.screenY;
