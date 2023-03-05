@@ -213,16 +213,8 @@ class ImageViewer {
         const imagesWrapper = this.view.getElementsByClassName('imagesWrapper')[0];
         const imageElements = imagesWrapper.getElementsByClassName('image');
         const testss = this.view.getElementsByClassName('image')
-
         
-        console.log('imageElements.length');
-        
-        console.log(testss);
-        console.log(imagesWrapper);
-        console.log(imageElements);
-        console.log(imageElements.length);
-        
-        imageElements.forEach((image) => {
+        Array.from(imageElements).forEach((image) => {
           console.log('dispatching~~');
           image.dispatchEvent(e);
         });
