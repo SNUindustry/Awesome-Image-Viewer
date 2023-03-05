@@ -188,7 +188,7 @@ class ImageViewer {
         // 새로 설정
         // 여기에서 각 이미지 엘리먼트 들을 긁어온다음에 element.dispatchevent로 이벤트 전달.
         const touchSurface = this.view.getElementsByClassName('touchSurface')[0];
-        touchSurface.removeEventListener(this.touchSurfaceClickEvent);
+        touchSurface.removeEventListener('click', this.touchSurfaceClickEvent);
         touchSurface.addEventListener('click', this.touchSurfaceClickEvent);
 
     }
